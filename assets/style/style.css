@@ -156,7 +156,7 @@ nav ul li ul li a {
 }
 
 .dispo {
-    background: url(../images/acutellement.webp) no-repeat center/cover;
+    background: url(../images/disponible.png) no-repeat center/cover;
     min-width: 235px;
     height: 125px;
     animation: movedispo 30s infinite;
@@ -222,7 +222,7 @@ nav ul li ul li a {
 }
 
 .recrute {
-    background: url(../images/enPoste.webp) no-repeat center/cover;
+    background: url(../images/recrute.png) no-repeat center/cover;
     min-width: 235px;
     height: 125px;
     animation: movedispo 30s infinite;
