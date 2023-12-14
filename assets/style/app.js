@@ -31,7 +31,6 @@
 //     });
 
 // })(jQuery);
-(function ($) {
 
 const burger = document.getElementById('navbar-toggle');
 const links = document.querySelectorAll('#link');
@@ -40,7 +39,7 @@ const navComponent = document.querySelectorAll('nav ul li a');
 const hidden = document.querySelector('.hidden');
 let isOpen = false;
 let playOnce = true;
-console.log(nav)
+
 burger.addEventListener('click', () => {
     burger.classList.toggle('active');
     $('nav ul li').toggle('slow');
@@ -77,4 +76,4 @@ closeBtn.addEventListener('click', () => {
     popup.style.opacity = 0;
     popup.style.transform = 'translateX(500px)';
 });
-})(jQuery);
+
