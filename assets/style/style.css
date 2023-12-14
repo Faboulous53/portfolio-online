@@ -72,11 +72,11 @@ nav ul li a:hover {
     color: white;
     transform: scale(1.1);
 }
-/* nav ul li a:not(:only-child):after,
+nav ul li a:not(:only-child):after,
 nav ul li a:visited:not(:only-child):after {
     padding-left: 4px;
     content: ' \025BE';
-} */
+}
 nav ul li ul li {
     min-width: 190px;
 }
