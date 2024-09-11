@@ -1,78 +1,122 @@
-//
-//     // a retravailler
-//     $(window).resize(function () {
-//         if ($(window).width() > 1077) {
-//             $('nav ul li').css('display', 'block');
-//             $('#navbar-toggle').classList.toggle('');
-//         } else {
-//             $('nav ul li').css('display', 'none');
-//             $('#navbar-toggle').removeClass();
+// (function ($) {
+//     const burger = document.getElementById('navbar-toggle');
+//     const links = document.querySelectorAll('#link');
+//     const nav = document.querySelectorAll('nav ul li');
+//     const navComponent = document.querySelectorAll('nav ul li a');
+//     const hidden = document.querySelector('.hidden');
+//     let isOpen = false;
+//     let playOnce = true;
+
+//     burger.addEventListener('click', () => {
+//         burger.classList.toggle('active');
+//         $('nav ul li').toggle('slow');
+//     });
+
+//     hidden.addEventListener('click', () => {
+//         if ($('nav ul li').is(':visible') && window.innerWidth < 1077) {
+//             $('nav ul li').slideToggle();
+//             burger.classList.remove('active');
 //         }
 //     });
 
-//     //  open and close nav
-//     $('#navbar-toggle').click(function () {
-//         $('nav ul li').slideToggle();
+//     links.forEach((link) => {
+//         link.addEventListener('click', () => {
+//             if (window.innerWidth < 1077) {
+//                 burger.classList.remove('active');
+//                 $('nav ul li').slideToggle();
+//             }
+//         });
 //     });
 
-//     // Hamburger toggle
-//     $('#navbar-toggle').on('click', function () {
-//         this.classList.toggle('active');
+//     window.addEventListener('scroll', () => {
+//         let scrollValue =
+//             (window.scrollY + window.innerHeight) / document.body.offsetHeight;
+//         if (scrollValue > 0.85 && playOnce) {
+//             popup.style.opacity = 1;
+//             popup.style.transform = 'none';
+//             playOnce = false;
+//         }
 //     });
 
-//     $('nav ul li a').click(function () {
-//         $('nav ul li').hide('slow');
-//         $('#navbar-toggle')[0].classList.remove('active');
+//     closeBtn.addEventListener('click', () => {
+//         popup.style.opacity = 0;
+//         popup.style.transform = 'translateX(500px)';
 //     });
+// })(jQuery);
 
-//     $('.hidden').on('click', function () {
-//         $('nav ul li ').hide('slow');
-//         $('#navbar-toggle')[0].classList.remove('active');
-//     });
+// function strReverse(str) {
+//     // Écrivez votre code ici
+//   return str.split("").reverse();
 
-//
-(function ($) {
+// }
+//   // Afficher la sortie
+//   console.log(strReverse("WayToLearnX"));
+//   console.log(strReverse("Hello"));
+
+document.addEventListener('DOMContentLoaded', () => {
     const burger = document.getElementById('navbar-toggle');
-    const links = document.querySelectorAll('#link');
-    const nav = document.querySelectorAll('nav ul li');
-    const navComponent = document.querySelectorAll('nav ul li a');
+    const navItems = document.querySelectorAll('nav ul li');
     const hidden = document.querySelector('.hidden');
-    let isOpen = false;
+    const popup = document.getElementById('popup');
+    const closeBtn = document.getElementById('closeBtn');
     let playOnce = true;
 
+    // Fonction de debounce pour optimiser les événements de défilement
+    function debounce(fn, delay) {
+        let timer;
+        return function (...args) {
+            clearTimeout(timer);
+            timer = setTimeout(() => fn.apply(this, args), delay);
+        };
+    }
+
+    // Gestion du clic sur le bouton de navigation
     burger.addEventListener('click', () => {
         burger.classList.toggle('active');
-        $('nav ul li').toggle('slow');
+        navItems.forEach(
+            (item) =>
+                (item.style.display = burger.classList.contains('active')
+                    ? 'block'
+                    : 'none'),                    
+                                      
+        );
     });
 
+    // Gestion du clic sur le bouton caché
     hidden.addEventListener('click', () => {
-        if ($('nav ul li').is(':visible') && window.innerWidth < 1077) {
-            $('nav ul li').slideToggle();
+        if (burger.classList.contains('active')) {
             burger.classList.remove('active');
+            navItems.forEach((item) => (item.style.display = 'none'));
         }
     });
 
-    links.forEach((link) => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth < 1077) {
+    // Gestion des clics sur les liens de navigation
+    navItems.forEach((item) => {
+        item.addEventListener('click', () => {
+            if (burger.classList.contains('active')) {
                 burger.classList.remove('active');
-                $('nav ul li').slideToggle();
+                navItems.forEach((item) => (item.style.display = 'none'));
             }
         });
     });
 
-    window.addEventListener('scroll', () => {
-        let scrollValue =
-            (window.scrollY + window.innerHeight) / document.body.offsetHeight;
-        if (scrollValue > 0.85 && playOnce) {
-            popup.style.opacity = 1;
-            popup.style.transform = 'none';
-            playOnce = false;
-        }
-    });
+    // Gestion du défilement avec debounce
+    window.addEventListener(
+        'scroll',
+        debounce(() => {
+            let scrollValue =
+                (window.scrollY + window.innerHeight) /
+                document.body.offsetHeight;
+            if (scrollValue > 0.85 && playOnce) {
+                popup.classList.add('active');
+                popup.style.opacity = 1;
+                playOnce = false;
+            }
+        }, 100)
+    );
 
+    // Gestion du clic pour fermer le popup
     closeBtn.addEventListener('click', () => {
         popup.style.opacity = 0;
-        popup.style.transform = 'translateX(500px)';
     });
-})(jQuery);
+});

@@ -46,6 +46,7 @@ strong {
 nav {
     float: right;
 }
+
 nav ul {
     list-style: none;
     margin: 0;
@@ -890,8 +891,7 @@ strong {
     background: linear-gradient(90deg, white, rgb(104, 67, 16));
     border-radius: 76% 24% 90% 10% / 20% 85% 15% 80%;
     box-shadow: 0 5px 10px black;
-    opacity: 0;
-    transform: translateX(400px);
+    opacity: 0;    
     transition: 1s ease-out;
 }
 .pop-up-container {
@@ -1017,6 +1017,7 @@ footer {
         padding: 55px 0 15px;
         text-align: center;
         margin: 0 auto;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease;/* Animation pour l'apparition */
     }
     nav ul li {
         display: none;
